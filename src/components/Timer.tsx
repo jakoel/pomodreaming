@@ -4,17 +4,25 @@ import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
 interface TimerProps {
-  initialMinutes?: number;
+  initialMinutes: number;
   onComplete?: () => void;
+  currentTask?: string;
 }
 
-export const Timer = ({ initialMinutes = 25, onComplete }: TimerProps) => {
+export const Timer = ({ initialMinutes, onComplete, currentTask }: TimerProps) => {
   const [seconds, setSeconds] = useState(initialMinutes * 60);
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(100);
   const { toast } = useToast();
 
   const totalSeconds = initialMinutes * 60;
+
+  // Reset timer when initialMinutes changes
+  useEffect(() => {
+    setSeconds(initialMinutes * 60);
+    setProgress(100);
+    setIsActive(false);
+  }, [initialMinutes]);
 
   const formatTime = useCallback((timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -45,7 +53,17 @@ export const Timer = ({ initialMinutes = 25, onComplete }: TimerProps) => {
     return () => clearInterval(interval);
   }, [isActive, seconds, totalSeconds, toast, onComplete]);
 
-  const toggleTimer = () => setIsActive(!isActive);
+  const toggleTimer = () => {
+    if (!currentTask) {
+      toast({
+        title: "Task Required",
+        description: "Please enter what you're working on before starting the timer.",
+        variant: "destructive"
+      });
+      return;
+    }
+    setIsActive(!isActive);
+  };
 
   const resetTimer = () => {
     setIsActive(false);
@@ -79,6 +97,11 @@ export const Timer = ({ initialMinutes = 25, onComplete }: TimerProps) => {
           <div className="text-4xl font-bold tracking-tight">
             {formatTime(seconds)}
           </div>
+          {currentTask && (
+            <div className="text-sm text-muted-foreground mt-2">
+              {currentTask}
+            </div>
+          )}
         </div>
       </div>
 

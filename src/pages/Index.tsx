@@ -19,30 +19,33 @@ const TIMER_PRESETS = [
 ];
 
 const Index = () => {
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [currentTask, setCurrentTask] = useState<string>('');
   const [sessions, setSessions] = useState<Session[]>([]);
   const [selectedPreset, setSelectedPreset] = useState(TIMER_PRESETS[0]);
   const { toast } = useToast();
 
   const handleTaskAdd = (task: string) => {
-    setTasks([...tasks, task]);
+    setCurrentTask(task);
     toast({
-      title: 'Task added',
-      description: 'Your task has been added to the list.',
+      title: 'Task set',
+      description: 'You can now start the timer.',
     });
   };
 
-  const handleTimerComplete = (task: string) => {
-    const newSession = {
-      duration: selectedPreset.minutes,
-      task,
-      completedAt: new Date(),
-    };
-    setSessions([newSession, ...sessions]);
-    toast({
-      title: 'Session completed!',
-      description: `You completed a ${selectedPreset.minutes} minute session.`,
-    });
+  const handleTimerComplete = () => {
+    if (currentTask) {
+      const newSession = {
+        duration: selectedPreset.minutes,
+        task: currentTask,
+        completedAt: new Date(),
+      };
+      setSessions([newSession, ...sessions]);
+      setCurrentTask(''); // Reset current task after completion
+      toast({
+        title: 'Session completed!',
+        description: `You completed a ${selectedPreset.minutes} minute session.`,
+      });
+    }
   };
 
   const formatTime = (date: Date) => {
@@ -110,7 +113,8 @@ const Index = () => {
 
             <Timer
               initialMinutes={selectedPreset.minutes}
-              onComplete={() => handleTimerComplete(tasks[tasks.length - 1])}
+              onComplete={handleTimerComplete}
+              currentTask={currentTask}
             />
 
             <div className="mt-8 max-w-md mx-auto">
