@@ -14,6 +14,7 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
   const [seconds, setSeconds] = useState(initialMinutes * 60);
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(100);
+  const [hasCompleted, setHasCompleted] = useState(false);
   const { toast } = useToast();
 
   const totalSeconds = initialMinutes * 60;
@@ -23,6 +24,7 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
     setSeconds(initialMinutes * 60);
     setProgress(100);
     setIsActive(false);
+    setHasCompleted(false);
   }, [initialMinutes]);
 
   // Update timer state when external isActive changes
@@ -49,8 +51,9 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
           return newSeconds;
         });
       }, 1000);
-    } else if (seconds === 0) {
+    } else if (seconds === 0 && !hasCompleted) {
       setIsActive(false);
+      setHasCompleted(true);
       toast({
         title: "Time's up!",
         description: "Take a break and start fresh.",
@@ -59,7 +62,7 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
     }
 
     return () => clearInterval(interval);
-  }, [isActive, seconds, totalSeconds, toast, onComplete]);
+  }, [isActive, seconds, totalSeconds, toast, onComplete, hasCompleted]);
 
   const toggleTimer = () => {
     if (!currentTask) {
@@ -77,6 +80,7 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
     setIsActive(false);
     setSeconds(initialMinutes * 60);
     setProgress(100);
+    setHasCompleted(false);
   };
 
   return (
