@@ -27,7 +27,7 @@ const Index = () => {
 
   const handleTaskAdd = (task: string) => {
     setCurrentTask(task);
-    setIsTimerActive(true);
+    setIsTimerActive(true); // Start timer when task is added
     toast({
       title: 'Session Started',
       description: `Starting ${selectedPreset.minutes} minute focus session.`,
@@ -44,20 +44,11 @@ const Index = () => {
       setSessions([newSession, ...sessions]);
       setCurrentTask('');
       setIsTimerActive(false);
-    }
-  };
-
-  const handlePresetSelect = (preset: typeof TIMER_PRESETS[0]) => {
-    // Only check if timer is active, not the internal state
-    if (isTimerActive) {
       toast({
-        title: "Timer is running",
-        description: "Please pause the current timer before changing the duration.",
-        variant: "destructive"
+        title: 'Session completed!',
+        description: `You completed a ${selectedPreset.minutes} minute session.`,
       });
-      return;
     }
-    setSelectedPreset(preset);
   };
 
   const formatTime = (date: Date) => {
@@ -69,7 +60,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 relative bg-[radial-gradient(#ffffff10_1px,transparent_1px)] bg-[size:20px_20px]">
+    <div className="min-h-screen p-4">
       <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <h1 className="text-2xl font-bold tracking-tight text-center">Focus Timer</h1>
@@ -78,7 +69,7 @@ const Index = () => {
 
       <div className="mt-16">
         <ResizablePanelGroup direction="horizontal" className="min-h-[600px] rounded-lg border">
-          <ResizablePanel defaultSize={30} className="p-4">
+          <ResizablePanel defaultSize={40} className="p-4">
             <div className="h-full glass-morphism rounded-lg p-4">
               <h2 className="text-xl font-semibold mb-4">Session History</h2>
               <ScrollArea className="h-[500px] pr-4">
@@ -106,20 +97,20 @@ const Index = () => {
 
           <ResizableHandle />
 
-          <ResizablePanel defaultSize={70} className="p-4">
+          <ResizablePanel defaultSize={60} className="p-4">
             <div className="h-full glass-morphism rounded-lg p-4">
               <div className="grid grid-cols-4 gap-2 mb-8">
                 {TIMER_PRESETS.map((preset) => (
                   <button
                     key={preset.label}
-                    onClick={() => handlePresetSelect(preset)}
-                    className={`p-2 rounded-lg transition-all duration-300 text-sm ${
+                    onClick={() => setSelectedPreset(preset)}
+                    className={`p-2 rounded-lg transition-all duration-300 ${
                       selectedPreset.label === preset.label
                         ? 'glass-morphism bg-white/10'
                         : 'glass-morphism hover:bg-white/10'
                     }`}
                   >
-                    <div className="text-xs font-medium">{preset.label}</div>
+                    <div className="text-sm font-medium">{preset.label}</div>
                     <div className="text-xs text-muted-foreground">{preset.minutes}m</div>
                   </button>
                 ))}
