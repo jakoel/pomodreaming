@@ -7,9 +7,10 @@ interface TimerProps {
   initialMinutes: number;
   onComplete?: () => void;
   currentTask?: string;
+  isActive?: boolean;
 }
 
-export const Timer = ({ initialMinutes, onComplete, currentTask }: TimerProps) => {
+export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: externalIsActive }: TimerProps) => {
   const [seconds, setSeconds] = useState(initialMinutes * 60);
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(100);
@@ -23,6 +24,13 @@ export const Timer = ({ initialMinutes, onComplete, currentTask }: TimerProps) =
     setProgress(100);
     setIsActive(false);
   }, [initialMinutes]);
+
+  // Update timer state when external isActive changes
+  useEffect(() => {
+    if (externalIsActive !== undefined) {
+      setIsActive(externalIsActive);
+    }
+  }, [externalIsActive]);
 
   const formatTime = useCallback((timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60);

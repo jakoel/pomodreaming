@@ -22,13 +22,15 @@ const Index = () => {
   const [currentTask, setCurrentTask] = useState<string>('');
   const [sessions, setSessions] = useState<Session[]>([]);
   const [selectedPreset, setSelectedPreset] = useState(TIMER_PRESETS[0]);
+  const [isTimerActive, setIsTimerActive] = useState(false);
   const { toast } = useToast();
 
   const handleTaskAdd = (task: string) => {
     setCurrentTask(task);
+    setIsTimerActive(true); // Start timer when task is added
     toast({
-      title: 'Task set',
-      description: 'You can now start the timer.',
+      title: 'Session Started',
+      description: `Starting ${selectedPreset.minutes} minute focus session.`,
     });
   };
 
@@ -40,7 +42,8 @@ const Index = () => {
         completedAt: new Date(),
       };
       setSessions([newSession, ...sessions]);
-      setCurrentTask(''); // Reset current task after completion
+      setCurrentTask('');
+      setIsTimerActive(false);
       toast({
         title: 'Session completed!',
         description: `You completed a ${selectedPreset.minutes} minute session.`,
@@ -58,71 +61,75 @@ const Index = () => {
 
   return (
     <div className="min-h-screen p-4">
-      <div className="text-center mb-8 animate-fade-in">
-        <h1 className="text-4xl font-bold tracking-tight">Focus Timer</h1>
-        <p className="text-muted-foreground">Stay productive, stay focused.</p>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <h1 className="text-2xl font-bold tracking-tight text-center">Focus Timer</h1>
+        </div>
       </div>
 
-      <ResizablePanelGroup direction="horizontal" className="min-h-[600px] rounded-lg border">
-        <ResizablePanel defaultSize={40} className="p-4">
-          <div className="h-full glass-morphism rounded-lg p-4">
-            <h2 className="text-xl font-semibold mb-4">Session History</h2>
-            <ScrollArea className="h-[500px] pr-4">
-              <div className="space-y-4">
-                {sessions.map((session, index) => (
-                  <div
-                    key={index}
-                    className="p-4 glass-morphism rounded-lg transition-all duration-300 hover:bg-white/10"
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-muted-foreground">
-                        {formatTime(session.completedAt)}
-                      </span>
-                      <span className="text-sm font-medium">
-                        {session.duration}m
-                      </span>
+      <div className="mt-16">
+        <ResizablePanelGroup direction="horizontal" className="min-h-[600px] rounded-lg border">
+          <ResizablePanel defaultSize={40} className="p-4">
+            <div className="h-full glass-morphism rounded-lg p-4">
+              <h2 className="text-xl font-semibold mb-4">Session History</h2>
+              <ScrollArea className="h-[500px] pr-4">
+                <div className="space-y-4">
+                  {sessions.map((session, index) => (
+                    <div
+                      key={index}
+                      className="p-4 glass-morphism rounded-lg transition-all duration-300 hover:bg-white/10"
+                    >
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm text-muted-foreground">
+                          {formatTime(session.completedAt)}
+                        </span>
+                        <span className="text-sm font-medium">
+                          {session.duration}m
+                        </span>
+                      </div>
+                      <p className="text-sm">{session.task}</p>
                     </div>
-                    <p className="text-sm">{session.task}</p>
-                  </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </div>
+          </ResizablePanel>
+
+          <ResizableHandle />
+
+          <ResizablePanel defaultSize={60} className="p-4">
+            <div className="h-full glass-morphism rounded-lg p-4">
+              <div className="grid grid-cols-4 gap-2 mb-8">
+                {TIMER_PRESETS.map((preset) => (
+                  <button
+                    key={preset.label}
+                    onClick={() => setSelectedPreset(preset)}
+                    className={`p-2 rounded-lg transition-all duration-300 ${
+                      selectedPreset.label === preset.label
+                        ? 'glass-morphism bg-white/10'
+                        : 'glass-morphism hover:bg-white/10'
+                    }`}
+                  >
+                    <div className="text-sm font-medium">{preset.label}</div>
+                    <div className="text-xs text-muted-foreground">{preset.minutes}m</div>
+                  </button>
                 ))}
               </div>
-            </ScrollArea>
-          </div>
-        </ResizablePanel>
 
-        <ResizableHandle withHandle />
+              <Timer
+                initialMinutes={selectedPreset.minutes}
+                onComplete={handleTimerComplete}
+                currentTask={currentTask}
+                isActive={isTimerActive}
+              />
 
-        <ResizablePanel defaultSize={60} className="p-4">
-          <div className="h-full glass-morphism rounded-lg p-4">
-            <div className="grid grid-cols-4 gap-2 mb-8">
-              {TIMER_PRESETS.map((preset) => (
-                <button
-                  key={preset.label}
-                  onClick={() => setSelectedPreset(preset)}
-                  className={`p-2 rounded-lg transition-all duration-300 ${
-                    selectedPreset.label === preset.label
-                      ? 'glass-morphism bg-white/10'
-                      : 'glass-morphism hover:bg-white/10'
-                  }`}
-                >
-                  <div className="text-sm font-medium">{preset.label}</div>
-                  <div className="text-xs text-muted-foreground">{preset.minutes}m</div>
-                </button>
-              ))}
+              <div className="mt-8 max-w-md mx-auto">
+                <TaskInput onTaskAdd={handleTaskAdd} />
+              </div>
             </div>
-
-            <Timer
-              initialMinutes={selectedPreset.minutes}
-              onComplete={handleTimerComplete}
-              currentTask={currentTask}
-            />
-
-            <div className="mt-8 max-w-md mx-auto">
-              <TaskInput onTaskAdd={handleTaskAdd} />
-            </div>
-          </div>
-        </ResizablePanel>
-      </ResizablePanelGroup>
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
 
 interface TaskInputProps {
   onTaskAdd: (task: string) => void;
@@ -28,9 +27,9 @@ export const TaskInput = ({ onTaskAdd }: TaskInputProps) => {
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-md hover:bg-white/10 transition-colors duration-300"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors duration-300"
         >
-          <Plus className="w-5 h-5" />
+          Start Session
         </button>
       </div>
     </form>
