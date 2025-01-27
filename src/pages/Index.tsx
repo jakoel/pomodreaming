@@ -27,7 +27,7 @@ const Index = () => {
 
   const handleTaskAdd = (task: string) => {
     setCurrentTask(task);
-    setIsTimerActive(true); // Start timer when task is added
+    setIsTimerActive(true);
     toast({
       title: 'Session Started',
       description: `Starting ${selectedPreset.minutes} minute focus session.`,
@@ -104,14 +104,14 @@ const Index = () => {
                   <button
                     key={preset.label}
                     onClick={() => setSelectedPreset(preset)}
-                    className={`p-2 rounded-lg transition-all duration-300 ${
+                    className={`p-1.5 rounded-lg transition-all duration-300 ${
                       selectedPreset.label === preset.label
                         ? 'glass-morphism bg-white/10'
                         : 'glass-morphism hover:bg-white/10'
                     }`}
                   >
-                    <div className="text-sm font-medium">{preset.label}</div>
-                    <div className="text-xs text-muted-foreground">{preset.minutes}m</div>
+                    <div className="text-xs font-medium">{preset.label}</div>
+                    <div className="text-[10px] text-muted-foreground">{preset.minutes}m</div>
                   </button>
                 ))}
               </div>
