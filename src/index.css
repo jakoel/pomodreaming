@@ -35,6 +35,8 @@
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 2px, transparent 2px);
+    background-size: 24px 24px;
   }
 
   html {

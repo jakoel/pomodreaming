@@ -69,7 +69,7 @@ const Index = () => {
 
       <div className="mt-16">
         <ResizablePanelGroup direction="horizontal" className="min-h-[600px] rounded-lg border">
-          <ResizablePanel defaultSize={40} className="p-4">
+          <ResizablePanel defaultSize={28} className="p-4">
             <div className="h-full glass-morphism rounded-lg p-4">
               <h2 className="text-xl font-semibold mb-4">Session History</h2>
               <ScrollArea className="h-[500px] pr-4">
@@ -97,7 +97,7 @@ const Index = () => {
 
           <ResizableHandle />
 
-          <ResizablePanel defaultSize={60} className="p-4">
+          <ResizablePanel defaultSize={72} className="p-4">
             <div className="h-full glass-morphism rounded-lg p-4">
               <div className="grid grid-cols-4 gap-2 mb-8">
                 {TIMER_PRESETS.map((preset) => (
