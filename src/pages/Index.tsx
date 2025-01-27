@@ -48,6 +48,7 @@ const Index = () => {
   };
 
   const handlePresetSelect = (preset: typeof TIMER_PRESETS[0]) => {
+    // Only check if timer is active, not the internal state
     if (isTimerActive) {
       toast({
         title: "Timer is running",
