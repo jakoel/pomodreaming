@@ -1,69 +1,57 @@
-# Welcome to your Lovable project
+# Pomodoro Timer
 
-## Project info
+A modern, customizable Pomodoro timer application built with React and TypeScript. Keep track of your work sessions and stay productive with a beautiful, personalized interface.
 
-**URL**: https://lovable.dev/projects/d3b5ad36-0d81-4ad2-aa34-9a1db8af42bb
+## Features
 
-## How can I edit this code?
+- **Pomodoro Timer**: Customizable work and break intervals
+- **Session History**: Track and review your past Pomodoro sessions
+- **Customizable Background**: Personalize your experience with different background options
+- **Modern UI**: Clean and responsive interface built with shadcn/ui components
+- **Persistent Storage**: Your settings and history are saved locally
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [React](https://react.dev/) - A JavaScript library for building user interfaces
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com/) - Re-usable components built with Radix UI and Tailwind CSS
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d3b5ad36-0d81-4ad2-aa34-9a1db8af42bb) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js (version 16 or higher)
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/pomodoro-timer.git
+cd pomodoro-timer
 ```
 
-**Edit a file directly in GitHub**
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-**Use GitHub Codespaces**
+## License
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-## What technologies are used for this project?
+## Acknowledgments
 
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/d3b5ad36-0d81-4ad2-aa34-9a1db8af42bb) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+- Inspired by the Pomodoro Technique® developed by Francesco Cirillo
+- Built with modern web technologies and open-source components
