@@ -76,39 +76,41 @@ const Index = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8 pt-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 min-h-[80vh]">
           {/* Main Timer Section */}
-          <div className="flex-1 w-full md:w-auto flex flex-col items-center justify-center">
-            <div className="flex justify-center mb-12 gap-3">
-              {TIMER_PRESETS.map((preset) => (
-                <button
-                  key={preset.label}
-                  onClick={() => setSelectedPreset(preset)}
-                  className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 mb-8 ${
-                    selectedPreset.label === preset.label
-                      ? 'bg-white text-purple-dark shadow-lg'
-                      : 'bg-white/10 text-white hover:bg-white/20'
-                  }`}
-                >
-                  {preset.label}
-                </button>
-              ))}
-            </div>
+          <div className="transform scale-125"> {/* Apply scaling here */}
+            <div className="flex-1 w-full md:w-auto flex flex-col items-center justify-center">
+              <div className="flex justify-center mb-12 gap-3">
+                {TIMER_PRESETS.map((preset) => (
+                  <button
+                    key={preset.label}
+                    onClick={() => setSelectedPreset(preset)}
+                    className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 mb-8 ${
+                      selectedPreset.label === preset.label
+                        ? 'bg-white text-purple-dark shadow-lg'
+                        : 'bg-white/10 text-white hover:bg-white/20'
+                    }`}
+                  >
+                    {preset.label}
+                  </button>
+                ))}
+              </div>
 
-            <div className="transform scale-125">
-              <Timer
-                initialMinutes={selectedPreset.minutes}
-                onComplete={handleTimerComplete}
-                currentTask={currentTask}
-                isActive={isTimerActive}
-              />
-            </div>
+              <div>
+                <Timer
+                  initialMinutes={selectedPreset.minutes}
+                  onComplete={handleTimerComplete}
+                  currentTask={currentTask}
+                  isActive={isTimerActive}
+                />
+              </div>
 
-            <div className="mt-12 w-full max-w-md">
-              <TaskInput onTaskAdd={handleTaskAdd} />
+              <div className="mt-12 w-full max-w-md">
+                <TaskInput onTaskAdd={handleTaskAdd} />
+              </div>
             </div>
           </div>
 
           {/* Session History */}
-          <div className="w-full md:w-80 glass-morphism rounded-xl p-4 flex flex-col min-h-[400px] max-h-[calc(100vh-4rem)]">
+          <div className="w-full md:w-80 glass-morphism rounded-xl p-4 flex flex-col min-h-[500px] max-h-[calc(100vh-4rem)] ml-24">
             <h2 className="text-lg font-semibold mb-4 text-white/90">Session History</h2>
             <ScrollArea className="flex-grow pr-4">
               <div className="space-y-4">
