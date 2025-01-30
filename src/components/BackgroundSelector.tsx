@@ -32,7 +32,7 @@ export function BackgroundSelector({ onSelectGradient }: BackgroundSelectorProps
       <DialogTrigger asChild>
       <Button 
         variant="outline" 
-        className="bg-white/70 text-black/70 backdrop-blur-sm border-white/20 hover:bg-purple-500/50 hover:text-black"
+        className="bg-white/70 text-black/70 backdrop-blur-sm border-white/20 hover:bg-purple-500/50 hover:text-white"
       >
           Choose Background
         </Button>
