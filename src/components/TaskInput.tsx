@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 interface TaskInputProps {
   onTaskAdd: (task: string) => void;
@@ -6,12 +7,41 @@ interface TaskInputProps {
 
 export const TaskInput = ({ onTaskAdd }: TaskInputProps) => {
   const [task, setTask] = useState('');
+  const { toast } = useToast();
+
+  const validateTask = (input: string) => {
+    if (input.length < 3) {
+      return 'Task must be at least 3 characters long';
+    }
+    if (input.length > 100) {
+      return 'Task must be less than 100 characters';
+    }
+    if (!/^[a-zA-Z0-9\s.,!?-]+$/.test(input)) {
+      return 'Task can only contain letters, numbers, and basic punctuation';
+    }
+    return null;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const error = validateTask(task.trim());
+    if (error) {
+      toast({
+        title: "Invalid Input",
+        description: error,
+        variant: "destructive"
+      });
+      return;
+    }
+
     if (task.trim()) {
       onTaskAdd(task);
       setTask('');
+      toast({
+        title: "Task Added",
+        description: "You can now start your timer!",
+      });
     }
   };
 
@@ -24,6 +54,7 @@ export const TaskInput = ({ onTaskAdd }: TaskInputProps) => {
           onChange={(e) => setTask(e.target.value)}
           placeholder="What are you working on?"
           className="w-full px-4 py-3 bg-gray-200 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 text-black placeholder-gray-700"
+          maxLength={100}
         />
         <button
           type="submit"
