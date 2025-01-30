@@ -3,7 +3,7 @@ import { Timer } from '@/components/Timer';
 import { TaskInput } from '@/components/TaskInput';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { BackgroundSelector } from '@/components/BackgroundSelector';
+import { TopBar } from '@/components/TopBar';
 
 interface Session {
   duration: number;
@@ -72,9 +72,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ background: backgroundGradient }}>
-      <BackgroundSelector onSelectGradient={handleGradientChange} />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 min-h-[80vh] ">
+      <TopBar onSelectGradient={handleGradientChange} />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-8 pt-20">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 min-h-[80vh]">
           {/* Main Timer Section */}
           <div className="flex-1 w-full md:w-auto flex flex-col items-center justify-center">
             <div className="flex justify-center mb-12 gap-3">
