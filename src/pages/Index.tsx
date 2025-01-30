@@ -56,10 +56,6 @@ const Index = () => {
 
   const handleGradientChange = (gradient: string) => {
     setBackgroundGradient(gradient);
-    toast({
-      title: 'Background Updated',
-      description: 'Your new background has been applied.',
-    });
   };
 
   const formatTime = (date: Date) => {
