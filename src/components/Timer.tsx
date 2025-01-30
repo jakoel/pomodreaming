@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 
 interface TimerProps {
   initialMinutes: number;
-  onComplete?: () => void;
+  onComplete?: (task: string) => void; // Updated to pass the task
   currentTask?: string;
   isActive?: boolean;
 }
@@ -56,13 +56,15 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
       setHasCompleted(true);
       toast({
         title: "Time's up!",
-        description: "Take a break and start fresh.",
+        description: "Your session has ended.",
       });
-      onComplete?.();
+      if (onComplete && currentTask) {
+        onComplete(currentTask); // Pass the completed task to Index.tsx
+      }
     }
 
     return () => clearInterval(interval);
-  }, [isActive, seconds, totalSeconds, toast, onComplete, hasCompleted]);
+  }, [isActive, seconds, totalSeconds, toast, onComplete, hasCompleted, currentTask]);
 
   const toggleTimer = () => {
     if (!currentTask) {
