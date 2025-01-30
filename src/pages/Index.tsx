@@ -33,22 +33,23 @@ const Index = () => {
     });
   };
 
-  const handleTimerComplete = () => {
-    if (currentTask) {
-      const newSession = {
-        duration: selectedPreset.minutes,
-        task: currentTask,
-        completedAt: new Date(),
-      };
-      setSessions([newSession, ...sessions]);
-      setCurrentTask('');
-      setIsTimerActive(false);
-      toast({
-        title: 'Session completed!',
-        description: `You completed a ${selectedPreset.minutes} minute session.`,
-      });
-    }
-  };
+const handleTimerComplete = (task: string) => {
+  if (task) {
+    const newSession = {
+      duration: selectedPreset.minutes,
+      task: task,
+      completedAt: new Date(),
+    };
+    setSessions([newSession, ...sessions]);
+    setCurrentTask('');
+    setIsTimerActive(false);
+    toast({
+      title: 'Session completed!',
+      description: `You completed a ${selectedPreset.minutes} minute session.`,
+    });
+  }
+};
+
 
   const formatTime = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', {
@@ -81,12 +82,13 @@ const Index = () => {
             </div>
 
             <div className="transform scale-125">
-              <Timer
-                initialMinutes={selectedPreset.minutes}
-                onComplete={handleTimerComplete}
-                currentTask={currentTask}
-                isActive={isTimerActive}
-              />
+            <Timer
+              initialMinutes={selectedPreset.minutes}
+              onComplete={handleTimerComplete} // Now correctly passing the function
+              currentTask={currentTask}
+              isActive={isTimerActive}
+            />
+
             </div>
 
             <div className="mt-12 w-full max-w-md">
