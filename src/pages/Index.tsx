@@ -59,7 +59,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-dark via-purple to-[#1A1F2C] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-purple-dark to-[#1A1F2C] relative overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 min-h-[80vh]">
           {/* Main Timer Section */}

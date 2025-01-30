@@ -23,7 +23,7 @@ export const TaskInput = ({ onTaskAdd }: TaskInputProps) => {
           value={task}
           onChange={(e) => setTask(e.target.value)}
           placeholder="What are you working on?"
-          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300"
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-white placeholder-white/60"
         />
         <button
           type="submit"
