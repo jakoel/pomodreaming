@@ -84,8 +84,8 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-12 animate-fade-in">
-      <div className="relative w-80 h-80 lg:w-96 lg:h-96"> {/* Increased size */}
+    <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in">
+      <div className="relative w-72 h-72 lg:w-80 lg:h-80">
         <svg className="w-full h-full transform -rotate-90">
           <circle
             cx="50%"
@@ -105,36 +105,36 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
           />
         </svg>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <div className="text-6xl lg:text-7xl font-bold tracking-tight text-white"> {/* Increased font size */}
+          <div className="text-5xl lg:text-6xl font-bold tracking-tight text-white">
             {formatTime(seconds)}
           </div>
           {currentTask && (
-            <div className="text-base lg:text-lg text-muted-foreground mt-4"> {/* Increased font size */}
+            <div className="text-sm lg:text-base text-muted-foreground mt-3">
               {currentTask}
             </div>
           )}
         </div>
       </div>
 
-      <div className="flex space-x-6"> {/* Increased spacing */}
+      <div className="flex space-x-4">
         <button
           onClick={toggleTimer}
           className={cn(
-            "p-6 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg transition-all duration-300 hover:scale-105", /* Increased padding */
+            "p-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg transition-all duration-300 hover:scale-105",
             isActive ? "opacity-80" : "opacity-100"
           )}
         >
           {isActive ? (
-            <Pause className="w-8 h-8 text-white" /> /* Increased icon size */
+            <Pause className="w-6 h-6 text-white" />
           ) : (
-            <Play className="w-8 h-8 text-white" /> /* Increased icon size */
+            <Play className="w-6 h-6 text-white" />
           )}
         </button>
         <button
           onClick={resetTimer}
-          className="p-6 rounded-full bg-gradient-to-r from-red-500 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105" /* Increased padding */
+          className="p-4 rounded-full bg-gradient-to-r from-red-500 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105"
         >
-          <RotateCcw className="w-8 h-8 text-white" /> /* Increased icon size */
+          <RotateCcw className="w-6 h-6 text-white" />
         </button>
       </div>
     </div>
