@@ -74,7 +74,7 @@ const Index = () => {
     <div className="min-h-screen relative overflow-hidden" style={{ background: backgroundGradient }}>
       <BackgroundSelector onSelectGradient={handleGradientChange} />
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 min-h-[80vh]">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 min-h-[80vh] ">
           {/* Main Timer Section */}
           <div className="flex-1 w-full md:w-auto flex flex-col items-center justify-center">
             <div className="flex justify-center mb-12 gap-3">
@@ -82,7 +82,7 @@ const Index = () => {
                 <button
                   key={preset.label}
                   onClick={() => setSelectedPreset(preset)}
-                  className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                  className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 mb-8 ${
                     selectedPreset.label === preset.label
                       ? 'bg-white text-purple-dark shadow-lg'
                       : 'bg-white/10 text-white hover:bg-white/20'
