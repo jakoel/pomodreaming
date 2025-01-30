@@ -95,12 +95,12 @@ export const TaskInput = ({ onTaskAdd }: TaskInputProps) => {
           maxLength={100}
           aria-label="Task input"
         />
-          <button
-            type="submit"
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 text-xs md:px-4 md:py-2 md:text-sm rounded-md bg-gradient-to-r from-purple-500 to-indigo-500 text-white bg-opacity-90 hover:bg-opacity-100 transition-colors duration-300"
-          >
-            Start Session
-          </button>
+        <button
+          type="submit"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-2 rounded-md bg-gradient-to-r from-purple-500 to-indigo-500 text-white bg-opacity-90 hover:bg-opacity-100 transition-colors duration-300"
+        >
+          Start Session
+        </button>
       </div>
     </form>
   );
