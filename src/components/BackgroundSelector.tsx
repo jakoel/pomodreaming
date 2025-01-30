@@ -23,7 +23,7 @@ const GRADIENTS = [
   { id: 15, value: "linear-gradient(180deg, #2af598 0%, #009efd 100%)" },
   { id: 16, value: "linear-gradient(to right, #6a11cb 0%, #2575fc 100%)" },
   { id: 17, value: "linear-gradient(to top, #37ecba 0%, #72afd3 100%)" },
-  { id: 18, value: "linear-gradient(to right, #434343 0%, black 100%);" },
+  { id: 18, value: "linear-gradient(to right, #434343 0%, black 100%)" },
 ];
 
 export function BackgroundSelector({ onSelectGradient }: BackgroundSelectorProps) {
