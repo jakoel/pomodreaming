@@ -18,6 +18,7 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
   const { toast } = useToast();
 
   const totalSeconds = initialMinutes * 60;
+  const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * (45 / 100 * 72); // Calculate based on radius
 
   useEffect(() => {
     setSeconds(initialMinutes * 60);
@@ -100,8 +101,8 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
             r="45%"
             className="stroke-primary fill-none transition-all duration-1000 ease-in-out"
             strokeWidth="8"
-            strokeDasharray="753.6"
-            strokeDashoffset={(100 - progress) / 100 * 753.6}
+            strokeDasharray={CIRCLE_CIRCUMFERENCE}
+            strokeDashoffset={(100 - progress) / 100 * CIRCLE_CIRCUMFERENCE}
           />
         </svg>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
