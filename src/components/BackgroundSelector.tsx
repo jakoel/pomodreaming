@@ -1,5 +1,6 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface BackgroundSelectorProps {
   onSelectGradient: (gradient: string) => void;
@@ -27,13 +28,20 @@ const GRADIENTS = [
 ];
 
 export function BackgroundSelector({ onSelectGradient }: BackgroundSelectorProps) {
+  const [open, setOpen] = useState(false);
+
+  const handleSelectGradient = (gradient: string) => {
+    onSelectGradient(gradient);
+    setOpen(false);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-      <Button 
-        variant="outline" 
-        className="bg-white/70 text-black/70 backdrop-blur-sm border-white/20 hover:bg-purple-500/50 hover:text-white"
-      >
+        <Button 
+          variant="outline" 
+          className="bg-white/70 text-black/70 backdrop-blur-sm border-white/20 hover:bg-purple-500/50 hover:text-white"
+        >
           Choose Background
         </Button>
       </DialogTrigger>
@@ -45,7 +53,7 @@ export function BackgroundSelector({ onSelectGradient }: BackgroundSelectorProps
           {GRADIENTS.map((gradient) => (
             <button
               key={gradient.id}
-              onClick={() => onSelectGradient(gradient.value)}
+              onClick={() => handleSelectGradient(gradient.value)}
               className="h-24 rounded-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/20"
               style={{ background: gradient.value }}
             />
@@ -55,3 +63,5 @@ export function BackgroundSelector({ onSelectGradient }: BackgroundSelectorProps
     </Dialog>
   );
 }
+
+export default BackgroundSelector;
