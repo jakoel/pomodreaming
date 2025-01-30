@@ -79,17 +79,17 @@ const Index = () => {
           <div className="w-full md:w-auto flex flex-col items-center justify-center text-center">
             <div className="flex justify-center mb-8 gap-3 flex-wrap w-full">
               {TIMER_PRESETS.map((preset) => (
-              <button
-                key={preset.label}
-                onClick={() => setSelectedPreset(preset)}
-                className={`px-4 py-1 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                  selectedPreset.label === preset.label
-                    ? 'bg-white text-purple-dark shadow-lg'
-                    : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
-              >
-                {preset.label}
-              </button>
+                <button
+                  key={preset.label}
+                  onClick={() => setSelectedPreset(preset)}
+                  className={`px-3 py-1 text-xs md:px-6 md:py-2 md:text-sm rounded-full font-medium font-medium transition-all duration-300 transform hover:scale-105 ${
+                    selectedPreset.label === preset.label
+                      ? 'bg-white text-purple-dark shadow-lg'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                  }`}
+                >
+                  {preset.label}
+                </button>
               ))}
             </div>
 
