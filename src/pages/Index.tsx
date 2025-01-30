@@ -82,7 +82,7 @@ const Index = () => {
                 <button
                   key={preset.label}
                   onClick={() => setSelectedPreset(preset)}
-                  className={`px-6 py-2 md:px-8 md:py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                  className={`px-4 py-1 md:px-8 md:py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                     selectedPreset.label === preset.label
                       ? 'bg-white text-purple-dark shadow-lg'
                       : 'bg-white/10 text-white hover:bg-white/20'
