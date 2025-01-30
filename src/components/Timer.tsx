@@ -100,13 +100,12 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
             r="120"
             className="stroke-primary fill-none transition-all duration-1000 ease-in-out"
             strokeWidth="8"
-            strokeDasharray="100 100"
-            strokeDashoffset={100 - progress}
-            style={{ strokeDasharray: '753.6 753.6', strokeDashoffset: ((100 - progress) / 100) * 753.6 }}
+            strokeDasharray="753.6"
+            strokeDashoffset={(100 - progress) / 100 * 753.6}
           />
         </svg>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <div className="text-4xl font-bold tracking-tight">
+          <div className="text-4xl font-bold tracking-tight text-white">
             {formatTime(seconds)}
           </div>
           {currentTask && (
@@ -121,21 +120,21 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
         <button
           onClick={toggleTimer}
           className={cn(
-            "p-4 rounded-full glass-morphism transition-all duration-300 hover:bg-white/10",
-            isActive ? "bg-white/10" : "bg-white/5"
+            "p-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg transition-all duration-300 hover:scale-105",
+            isActive ? "opacity-80" : "opacity-100"
           )}
         >
           {isActive ? (
-            <Pause className="w-6 h-6" />
+            <Pause className="w-6 h-6 text-white" />
           ) : (
-            <Play className="w-6 h-6" />
+            <Play className="w-6 h-6 text-white" />
           )}
         </button>
         <button
           onClick={resetTimer}
-          className="p-4 rounded-full glass-morphism transition-all duration-300 hover:bg-white/10"
+          className="p-4 rounded-full bg-gradient-to-r from-red-500 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105"
         >
-          <RotateCcw className="w-6 h-6" />
+          <RotateCcw className="w-6 h-6 text-white" />
         </button>
       </div>
     </div>
