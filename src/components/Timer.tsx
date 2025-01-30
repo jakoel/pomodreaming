@@ -18,7 +18,6 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
   const { toast } = useToast();
 
   const totalSeconds = initialMinutes * 60;
-  const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * (45 / 100 * 72); // Calculate based on radius
 
   useEffect(() => {
     setSeconds(initialMinutes * 60);
@@ -86,31 +85,31 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
 
   return (
     <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in">
-      <div className="relative w-72 h-72 lg:w-80 lg:h-80">
+      <div className="relative w-64 h-64">
         <svg className="w-full h-full transform -rotate-90">
           <circle
-            cx="50%"
-            cy="50%"
-            r="45%"
+            cx="128"
+            cy="128"
+            r="120"
             className="stroke-muted fill-none"
             strokeWidth="8"
           />
           <circle
-            cx="50%"
-            cy="50%"
-            r="45%"
+            cx="128"
+            cy="128"
+            r="120"
             className="stroke-primary fill-none transition-all duration-1000 ease-in-out"
             strokeWidth="8"
-            strokeDasharray={CIRCLE_CIRCUMFERENCE}
-            strokeDashoffset={(100 - progress) / 100 * CIRCLE_CIRCUMFERENCE}
+            strokeDasharray="753.6"
+            strokeDashoffset={(100 - progress) / 100 * 753.6}
           />
         </svg>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <div className="text-5xl lg:text-6xl font-bold tracking-tight text-white">
+          <div className="text-4xl font-bold tracking-tight text-white">
             {formatTime(seconds)}
           </div>
           {currentTask && (
-            <div className="text-sm lg:text-base text-muted-foreground mt-3">
+            <div className="text-sm text-muted-foreground mt-2">
               {currentTask}
             </div>
           )}
