@@ -3,6 +3,7 @@ import { Timer } from '@/components/Timer';
 import { TaskInput } from '@/components/TaskInput';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { BackgroundSelector } from '@/components/BackgroundSelector';
 
 interface Session {
   duration: number;
@@ -17,11 +18,14 @@ const TIMER_PRESETS = [
   { label: 'Quick Focus', minutes: 10 },
 ];
 
+const DEFAULT_GRADIENT = "linear-gradient(to br, from-[#1A1F2C] via-purple-dark to-[#1A1F2C])";
+
 const Index = () => {
   const [currentTask, setCurrentTask] = useState<string>('');
   const [sessions, setSessions] = useState<Session[]>([]);
   const [selectedPreset, setSelectedPreset] = useState(TIMER_PRESETS[0]);
   const [isTimerActive, setIsTimerActive] = useState(false);
+  const [backgroundGradient, setBackgroundGradient] = useState(DEFAULT_GRADIENT);
   const { toast } = useToast();
 
   const handleTaskAdd = (task: string) => {
@@ -33,23 +37,30 @@ const Index = () => {
     });
   };
 
-const handleTimerComplete = (task: string) => {
-  if (task) {
-    const newSession = {
-      duration: selectedPreset.minutes,
-      task: task,
-      completedAt: new Date(),
-    };
-    setSessions([newSession, ...sessions]);
-    setCurrentTask('');
-    setIsTimerActive(false);
-    toast({
-      title: 'Session completed!',
-      description: `You completed a ${selectedPreset.minutes} minute session.`,
-    });
-  }
-};
+  const handleTimerComplete = (task: string) => {
+    if (task) {
+      const newSession = {
+        duration: selectedPreset.minutes,
+        task: task,
+        completedAt: new Date(),
+      };
+      setSessions([newSession, ...sessions]);
+      setCurrentTask('');
+      setIsTimerActive(false);
+      toast({
+        title: 'Session completed!',
+        description: `You completed a ${selectedPreset.minutes} minute session.`,
+      });
+    }
+  };
 
+  const handleGradientChange = (gradient: string) => {
+    setBackgroundGradient(gradient);
+    toast({
+      title: 'Background Updated',
+      description: 'Your new background has been applied.',
+    });
+  };
 
   const formatTime = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', {
@@ -60,7 +71,8 @@ const handleTimerComplete = (task: string) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#310E68] relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden" style={{ background: backgroundGradient }}>
+      <BackgroundSelector onSelectGradient={handleGradientChange} />
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 min-h-[80vh]">
           {/* Main Timer Section */}
@@ -82,13 +94,12 @@ const handleTimerComplete = (task: string) => {
             </div>
 
             <div className="transform scale-125">
-            <Timer
-              initialMinutes={selectedPreset.minutes}
-              onComplete={handleTimerComplete} // Now correctly passing the function
-              currentTask={currentTask}
-              isActive={isTimerActive}
-            />
-
+              <Timer
+                initialMinutes={selectedPreset.minutes}
+                onComplete={handleTimerComplete}
+                currentTask={currentTask}
+                isActive={isTimerActive}
+              />
             </div>
 
             <div className="mt-12 w-full max-w-md">
