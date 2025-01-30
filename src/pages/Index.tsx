@@ -59,13 +59,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-dark via-purple-dark to-[#1A1F2C] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/lovable-uploads/0ddace60-6fd3-4fc3-9a91-f8e5593090e1.png')] bg-cover bg-center opacity-20" />
-      
+    <div className="min-h-screen bg-gradient-to-br from-purple-dark via-purple to-[#1A1F2C] relative overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
-        <div className="flex gap-8">
+        <div className="flex flex-col md:flex-row items-start justify-center gap-8">
           {/* Main Timer Section */}
-          <div className="flex-1">
+          <div className="flex-1 w-full md:w-auto flex flex-col items-center">
             <div className="flex justify-center mb-8 gap-2">
               {TIMER_PRESETS.map((preset) => (
                 <button
@@ -89,15 +87,15 @@ const Index = () => {
               isActive={isTimerActive}
             />
 
-            <div className="mt-8 max-w-md mx-auto">
+            <div className="mt-8 w-full max-w-md">
               <TaskInput onTaskAdd={handleTaskAdd} />
             </div>
           </div>
 
           {/* Session History */}
-          <div className="w-80 glass-morphism rounded-xl p-4">
+          <div className="w-full md:w-80 glass-morphism rounded-xl p-4 flex flex-col min-h-[400px] max-h-[calc(100vh-4rem)]">
             <h2 className="text-lg font-semibold mb-4 text-white/90">Session History</h2>
-            <ScrollArea className="h-[600px] pr-4">
+            <ScrollArea className="flex-grow pr-4">
               <div className="space-y-4">
                 {sessions.map((session, index) => (
                   <div
