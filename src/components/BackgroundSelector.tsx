@@ -1,6 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
 
 interface BackgroundSelectorProps {
   onSelectGradient: (gradient: string) => void;
@@ -25,7 +24,6 @@ const GRADIENTS = [
   { id: 16, value: "linear-gradient(to right, #6a11cb 0%, #2575fc 100%)" },
   { id: 17, value: "linear-gradient(to top, #37ecba 0%, #72afd3 100%)" },
   { id: 18, value: "linear-gradient(to top, #0ba360 0%, #3cba92 100%)" },
-  { id: 19, value: "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898" },
 ];
 
 export function BackgroundSelector({ onSelectGradient }: BackgroundSelectorProps) {
@@ -34,10 +32,9 @@ export function BackgroundSelector({ onSelectGradient }: BackgroundSelectorProps
       <DialogTrigger asChild>
         <Button 
           variant="outline" 
-          size="icon"
           className="fixed top-4 left-4 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20"
         >
-          <Settings className="h-4 w-4" />
+          Choose Background
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">

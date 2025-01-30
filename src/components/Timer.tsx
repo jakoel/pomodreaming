@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 
 interface TimerProps {
   initialMinutes: number;
-  onComplete?: (task: string) => void; // Updated to pass the task
+  onComplete?: (task: string) => void;
   currentTask?: string;
   isActive?: boolean;
 }
@@ -19,7 +19,6 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
 
   const totalSeconds = initialMinutes * 60;
 
-  // Reset timer when initialMinutes changes
   useEffect(() => {
     setSeconds(initialMinutes * 60);
     setProgress(100);
@@ -27,7 +26,6 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
     setHasCompleted(false);
   }, [initialMinutes]);
 
-  // Update timer state when external isActive changes
   useEffect(() => {
     if (externalIsActive !== undefined) {
       setIsActive(externalIsActive);
@@ -51,15 +49,15 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
           return newSeconds;
         });
       }, 1000);
-    } else if (seconds === 0 && !hasCompleted) {
+    } else if (seconds === 0 && !hasCompleted && currentTask) {
       setIsActive(false);
       setHasCompleted(true);
       toast({
         title: "Time's up!",
-        description: "Your session has ended.",
+        description: "Your session has been added to history.",
       });
-      if (onComplete && currentTask) {
-        onComplete(currentTask); // Pass the completed task to Index.tsx
+      if (onComplete) {
+        onComplete(currentTask);
       }
     }
 
