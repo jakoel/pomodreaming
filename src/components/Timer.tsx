@@ -19,6 +19,31 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
 
   const totalSeconds = initialMinutes * 60;
 
+  const formatTime = useCallback((timeInSeconds: number) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const remainingSeconds = timeInSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  }, []);
+
+  const toggleTimer = useCallback(() => {
+    if (!currentTask) {
+      toast({
+        title: "Task Required",
+        description: "Please enter what you're working on before starting the timer.",
+        variant: "destructive"
+      });
+      return;
+    }
+    setIsActive(prev => !prev);
+  }, [currentTask, toast]);
+
+  const resetTimer = useCallback(() => {
+    setIsActive(false);
+    setSeconds(initialMinutes * 60);
+    setProgress(100);
+    setHasCompleted(false);
+  }, [initialMinutes]);
+
   useEffect(() => {
     setSeconds(initialMinutes * 60);
     setProgress(100);
@@ -31,12 +56,6 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
       setIsActive(externalIsActive);
     }
   }, [externalIsActive]);
-
-  const formatTime = useCallback((timeInSeconds: number) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const remainingSeconds = timeInSeconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -63,25 +82,6 @@ export const Timer = ({ initialMinutes, onComplete, currentTask, isActive: exter
 
     return () => clearInterval(interval);
   }, [isActive, seconds, totalSeconds, toast, onComplete, hasCompleted, currentTask]);
-
-  const toggleTimer = () => {
-    if (!currentTask) {
-      toast({
-        title: "Task Required",
-        description: "Please enter what you're working on before starting the timer.",
-        variant: "destructive"
-      });
-      return;
-    }
-    setIsActive(!isActive);
-  };
-
-  const resetTimer = () => {
-    setIsActive(false);
-    setSeconds(initialMinutes * 60);
-    setProgress(100);
-    setHasCompleted(false);
-  };
 
   return (
     <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in">
