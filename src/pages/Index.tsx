@@ -104,9 +104,9 @@ const Index = () => {
           </div>
 
           {/* Session History */}
-          <div className="w-full md:w-80 glass-morphism rounded-xl p-4 flex flex-col min-h-[300px] md:min-h-[500px] max-h-[calc(100vh-4rem)]">
+          <div className="w-full md:w-80 glass-morphism rounded-xl p-4 flex flex-col h-[500px] md:h-[600px]">
             <h2 className="text-lg font-semibold mb-4 text-white/90">Session History</h2>
-            <ScrollArea className="flex-grow pr-4">
+            <ScrollArea className="flex-grow pr-4 h-full">
               <div className="space-y-4">
                 {sessions.map((session, index) => (
                   <div
@@ -121,7 +121,7 @@ const Index = () => {
                         {session.duration}m
                       </span>
                     </div>
-                    <p className="text-sm text-white/90">{session.task}</p>
+                    <p className="text-sm text-white/90 break-words">{session.task}</p>
                   </div>
                 ))}
               </div>
